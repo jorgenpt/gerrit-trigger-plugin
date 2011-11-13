@@ -309,6 +309,9 @@ public class ParameterExpander {
     protected int getMinimumVerifiedValue(MemoryImprint memoryImprint) {
         int verified = Integer.MAX_VALUE;
         for (Entry entry : memoryImprint.getEntries()) {
+            if (entry.getBuild().getResult() == Result.NOT_BUILT) {
+              continue;
+            }
             verified = Math.min(verified, getVerifiedValue(
                     entry.getBuild().getResult(),
                     getTrigger(entry.getProject())));
@@ -324,6 +327,9 @@ public class ParameterExpander {
     protected int getMinimumCodeReviewValue(MemoryImprint memoryImprint) {
         int codeReview = Integer.MAX_VALUE;
         for (Entry entry : memoryImprint.getEntries()) {
+            if (entry.getBuild().getResult() == Result.NOT_BUILT) {
+              continue;
+            }
             codeReview = Math.min(codeReview, getCodeReviewValue(
                     entry.getBuild().getResult(),
                     getTrigger(entry.getProject())));
