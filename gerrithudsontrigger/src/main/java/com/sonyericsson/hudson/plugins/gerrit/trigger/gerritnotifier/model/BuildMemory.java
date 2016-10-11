@@ -571,7 +571,8 @@ public class BuildMemory {
                 } else if (!entry.isBuildCompleted()) {
                     return false;
                 }
-                if (entry.getBuild().getResult() != Result.SUCCESS) {
+                Result buildResult = entry.getBuild().getResult();
+                if (buildResult != Result.SUCCESS && buildResult != Result.NOT_BUILT) {
                     return false;
                 }
             }
